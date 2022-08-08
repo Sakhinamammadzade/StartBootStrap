@@ -6,9 +6,5 @@
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public static implicit operator Services(List<Services> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StartBootstrap.Models;
 
 namespace StartBootstrap.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<M001Users>
     {
         public AppDbContext(DbContextOptions options) : base(options)
         { }
@@ -11,6 +13,13 @@ namespace StartBootstrap.Data
         public DbSet<Services> Services{ get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Portfolio> Portfolio { get; set; }
-      
+        public DbSet<Contact> Contacts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<M001Users>().ToTable("Users");
+            builder.Entity<IdentityRole>().ToTable("Roles");
+        }
     }
 }
